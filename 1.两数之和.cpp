@@ -4,12 +4,11 @@
  * [1] 两数之和
  */
 
+#include "common.h"
+
 // @lc code=start
 class Solution {
-public:
-    vector<int> twoSum(vector<int>& nums, int target) {
-        
-    }
+ public:
+  vector<int> twoSum(vector<int> &nums, int target) {}
 };
 // @lc code=end
-
