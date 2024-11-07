@@ -1,10 +1,16 @@
+// @before-stub-for-debug-begin
+#include <string>
+#include <unordered_map>
+#include <vector>
+
+using namespace std;
+// @before-stub-for-debug-end
+
 /**
  * @lc app=leetcode.cn id=1 lang=cpp
  *
  * [1] 两数之和
  */
-
-#include "common.h"
 
 // @lc code=start
 class Solution {
