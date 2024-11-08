@@ -37,6 +37,20 @@ public:
     return newHead;
   }
 
-  // ListNode *reverseListRecurse(ListNode *head) {}
+  /**
+   * NOTE: 总体思路即从倒数第二个节点开始
+   * NOTE: 每次每次让下一个节点的 next 指向自己
+   * NOTE: 自己的 next 可以不管，但这里指向 nullptr，是为了反转后的尾节点
+   * NOTE: 这里递归借助函数调用栈，存储了前面的节点
+   */
+  ListNode *reverseListRecurse(ListNode *head) { // HINT: 递归法
+    if (head == nullptr || head->next == nullptr) {
+      return head;
+    }
+    ListNode *newHead = reverseListRecurse(head->next);
+    head->next->next = head;
+    head->next = nullptr;
+    return newHead;
+  }
 };
 // @lc code=end
