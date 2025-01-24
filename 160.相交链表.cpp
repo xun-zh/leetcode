@@ -29,7 +29,9 @@ struct ListNode {
 class Solution {
 public:
   /**
-   * NOTE: 参考题解，借鉴链表判环的思想，视作追及问题
+   * NOTE: 参考题解，借鉴链表判环的思想
+   * NOTE: (将两个链表分别 一个链尾连到另一个头部)，
+   * NOTE: 可视作追及问题
    * NOTE: 如果 A, B 有交点
    * NOTE: 如果 A, B 没有交点
    */

@@ -16,6 +16,9 @@ class Solution {
 public:
   vector<int> spiralOrder(vector<vector<int>> &matrix) {
     // HINT: 模拟
+    if (matrix.size() == 0) {
+      return {};
+    }
     int capacity = matrix.size() * matrix[0].size();
     auto res = vector<int>(capacity);
     int top = 0;
