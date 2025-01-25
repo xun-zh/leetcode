@@ -31,7 +31,8 @@ public:
    * NOTE: 让时间复杂度小于O(n^2), 使用 hash map, 记录已访问的值与index的映射
    */
   vector<int> twoSum(vector<int> &nums, int target) {
-    unordered_map<int, int> num2index{};
+    unordered_map<int, int>
+        num2index{}; // HINT: 主动去找对应的数，而不是一味遍历
     for (int i = 0; i < nums.size(); i++) {
       if (num2index.find(target - nums[i]) != num2index.end()) {
         return vector{num2index[target - nums[i]], i};
