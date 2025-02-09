@@ -1,5 +1,6 @@
 // @before-stub-for-debug-begin
 #include "commoncppproblem239.h"
+#include <deque>
 #include <string>
 #include <vector>
 
@@ -13,11 +14,20 @@ using namespace std;
  */
 
 // @lc code=start
-class Solution {
+class Solution { // TODO
+  class MonotonicQueue {
+  private:
+    deque<int> data;
+
+  public:
+  };
+
 public:
   vector<int> maxSlidingWindow(vector<int> &nums, int k) { // TODO
     vector<int> res(nums.size() - k + 1);
-    
+    for (int i = 0; i < count; i++) {
+      /* code */
+    }
   }
 };
 // @lc code=end
