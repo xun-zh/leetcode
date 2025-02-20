@@ -20,7 +20,7 @@ using namespace std;
 class Solution {
 public:
   bool isHappy(int n) {
-    // HACK: 思考如果一直迭代下去是否可能一直变大而不出现循环？
+    // HINT: 思考如果一直迭代下去是否可能一直变大而不出现循环？
     auto appeared = unordered_set<int>{n};
     int remainder, intpartm, sqSum = 0, num = n;
     while (true) {

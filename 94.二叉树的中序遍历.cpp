@@ -1,18 +1,19 @@
 // @before-stub-for-debug-begin
+#include <stack>
 #include <string>
 #include <vector>
 
 using namespace std;
 
-struct TreeNode {
-  int val;
-  TreeNode *left;
-  TreeNode *right;
-  TreeNode() : val(0), left(nullptr), right(nullptr) {}
-  TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-  TreeNode(int x, TreeNode *left, TreeNode *right)
-      : val(x), left(left), right(right) {}
-};
+// struct TreeNode {
+//   int val;
+//   TreeNode *left;
+//   TreeNode *right;
+//   TreeNode() : val(0), left(nullptr), right(nullptr) {}
+//   TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+//   TreeNode(int x, TreeNode *left, TreeNode *right)
+//       : val(x), left(left), right(right) {}
+// };
 
 // @before-stub-for-debug-end
 
@@ -53,6 +54,21 @@ public:
   }
 
   vector<int> inorderTraversal(TreeNode *root) { // TODO: 迭代解法
+    vector<int> res{};
+    stack<TreeNode *> st{};
+    TreeNode *cur = root;
+    while (cur != nullptr || !st.empty()) {
+      if (cur) { // HINT: 一直往左下角并记录沿途的节点
+        st.push(cur);
+        cur = cur->left;
+      } else { // HINT: cur = nullptr, 说明走到了左下角，pop出的
+        cur = st.top();
+        st.pop();
+        res.push_back(cur->val);
+        cur = cur->right;
+      }
+    }
+    return res;
   }
 };
 // @lc code=end
