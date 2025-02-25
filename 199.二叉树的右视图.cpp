@@ -1,10 +1,12 @@
 /*
- * @lc app=leetcode.cn id=104 lang=cpp
+ * @lc app=leetcode.cn id=199 lang=cpp
  *
- * [104] 二叉树的最大深度
+ * [199] 二叉树的右视图
  */
-#include <algorithm>
-#include <iostream>
+#include <queue>
+#include <vector>
+using namespace std;
+
 struct TreeNode {
   int val;
   TreeNode *left;
@@ -28,40 +30,47 @@ struct TreeNode {
  * right(right) {}
  * };
  */
-class Solution { // HINT: recoursion
+class Solution {
 public:
-  int maxDepth_recur(TreeNode *root) {
+  /**
+   * @brief
+   *
+   * @param root
+   * @return vector<int>
+   * NOTE: 分析一下可知，二叉树每层最后一个即是结果
+   */
+  vector<int> rightSideView(TreeNode *root) {
     if (root == nullptr) {
-      return 0;
-    }
-    return std::max(maxDepth(root->left), maxDepth(root->right)) + 1;
-  }
-
-  int maxDepth(TreeNode *root) { // HINT: 迭代法使用 层次遍历
-    if (root == nullptr) {
-      return 0;
+      return {};
     }
     queue<TreeNode *> q{};
     vector<int> res{};
+    TreeNode *temp;
     q.push(root);
-    int level = 0;
-    TreeNode *temp_node = nullptr;
     while (!q.empty()) {
-      int level_size = q.size(); // HINT: 这一层有 s 个元素
-      int max = INT_MIN;
-      ++level;
-      while (level_size--) {
-        temp_node = q.front();
+      int level_size = q.size();
+      for (int _ = 1; _ < level_size; ++_) {
+        temp = q.front();
+        if (temp->left) {
+          q.push(temp->left);
+        }
+        if (temp->right) {
+          q.push(temp->right);
+        }
         q.pop();
-        if (temp_node->left) {
-          q.push(temp_node->left);
-        }
-        if (temp_node->right) {
-          q.push(temp_node->right);
-        }
       }
+      temp = q.front();
+      if (temp->left) {
+        q.push(temp->left);
+      }
+      if (temp->right) {
+        q.push(temp->right);
+      }
+      res.emplace_back(temp->val);
+      q.pop();
+      /* code */
     }
-    return level;
+    return res;
   }
 };
 // @lc code=end

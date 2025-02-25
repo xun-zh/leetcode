@@ -1,10 +1,13 @@
 /*
- * @lc app=leetcode.cn id=104 lang=cpp
+ * @lc app=leetcode.cn id=515 lang=cpp
  *
- * [104] 二叉树的最大深度
+ * [515] 在每个树行中找最大值
  */
-#include <algorithm>
-#include <iostream>
+
+#include <queue>
+#include <vector>
+using namespace std;
+
 struct TreeNode {
   int val;
   TreeNode *left;
@@ -28,31 +31,26 @@ struct TreeNode {
  * right(right) {}
  * };
  */
-class Solution { // HINT: recoursion
+class Solution {
 public:
-  int maxDepth_recur(TreeNode *root) {
+  vector<int> largestValues(TreeNode *root) {
     if (root == nullptr) {
-      return 0;
-    }
-    return std::max(maxDepth(root->left), maxDepth(root->right)) + 1;
-  }
-
-  int maxDepth(TreeNode *root) { // HINT: 迭代法使用 层次遍历
-    if (root == nullptr) {
-      return 0;
+      return {};
     }
     queue<TreeNode *> q{};
     vector<int> res{};
     q.push(root);
-    int level = 0;
+
     TreeNode *temp_node = nullptr;
     while (!q.empty()) {
       int level_size = q.size(); // HINT: 这一层有 s 个元素
       int max = INT_MIN;
-      ++level;
       while (level_size--) {
         temp_node = q.front();
         q.pop();
+        if (max < temp_node->val) {
+          max = temp_node->val;
+        }
         if (temp_node->left) {
           q.push(temp_node->left);
         }
@@ -60,8 +58,9 @@ public:
           q.push(temp_node->right);
         }
       }
+      res.emplace_back(max);
     }
-    return level;
+    return res;
   }
 };
 // @lc code=end
