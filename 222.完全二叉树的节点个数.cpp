@@ -1,9 +1,8 @@
 /*
- * @lc app=leetcode.cn id=111 lang=cpp
+ * @lc app=leetcode.cn id=222 lang=cpp
  *
- * [111] 二叉树的最小深度
+ * [222] 完全二叉树的节点个数
  */
-
 struct TreeNode {
   int val;
   TreeNode *left;
@@ -29,36 +28,28 @@ struct TreeNode {
  */
 class Solution {
 public:
-  int minDepth(TreeNode *root) {
+  int countNodes(TreeNode *root) {
     if (root == nullptr) {
       return 0;
     }
-    // 链表的情况[2,null,3,null,4,null,5,null,6]
-    // HINT: 当某个子树为空时其最小深度不能视作1
-    /**
-     *        1
-     *         \
-     *          2
-     *         / \
-     *        3   4
-     *           / \
-     */
-    return recur(root);
-  }
-
-  int recur(TreeNode *node) {
-    if (node == nullptr) {
-      return 0;
+    // NOTE: 针对完全二叉树的优化点, 如果向左左深度 == 向右深度 说明是满二叉树
+    // NOTE: -> 2^n - 1 个
+    int leftDepth = 0;
+    int rightDepth = 0;
+    TreeNode *left = root->left;
+    TreeNode *right = root->right;
+    while (left) {
+      left = left->left;
+      ++leftDepth;
     }
-    int leftDepth = recur(node->left);
-    int rightDepth = recur(node->right);
-    if (leftDepth == 0) {
-      return rightDepth + 1;
+    while (right) {
+      right = right->right;
+      ++rightDepth;
     }
-    if (rightDepth == 0) {
-      return leftDepth + 1;
+    if (leftDepth == rightDepth) {
+      return (2 << leftDepth) - 1;
     }
-    return 1 + std::min(leftDepth, rightDepth);
+    return countNodes(root->left) + countNodes(root->right) + 1;
   }
 };
 // @lc code=end
